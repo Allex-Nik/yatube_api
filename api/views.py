@@ -27,6 +27,7 @@ class GroupViewSet(viewsets.ModelViewSet):
             raise PermissionDenied("Creating groups is only allowed for admin users.")
         return super().create(request, *args, **kwargs)
 
+
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
