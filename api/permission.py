@@ -12,10 +12,3 @@ class IsAuthorOrReadOnly(permissions.BasePermission):
         if request.method in ('PUT', 'PATCH', 'DELETE'):
             return obj.author == request.user
         return True
-
-
-class IsAdminOrReadOnly(permissions.BasePermission):
-    def has_permission(self, request, view):
-        if request.method == 'POST' and not request.user.is_staff:
-            return False
-        return True
