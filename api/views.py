@@ -3,7 +3,7 @@ from posts.models import Post, Group, Comment
 from .serializers import PostSerializer, GroupSerializer, CommentSerializer
 from rest_framework.permissions import IsAuthenticated
 from .permission import IsAuthorOrReadOnly
-from rest_framework.exceptions import PermissionDenied
+from rest_framework.exceptions import MethodNotAllowed
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -21,9 +21,7 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
-        if not request.user.is_staff:
-            raise PermissionDenied
-        return super().create(request, *args, **kwargs)
+        raise MethodNotAllowed('POST')
 
 
 class CommentViewSet(viewsets.ModelViewSet):
