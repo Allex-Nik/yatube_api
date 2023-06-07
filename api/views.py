@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from posts.models import Post, Group, Comment
 from .serializers import PostSerializer, GroupSerializer, CommentSerializer
 from rest_framework.permissions import IsAuthenticated
-from .permission import IsAuthorOrReadOnly, IsOwnerOrReadOnly
+from .permission import IsAuthorOrReadOnly, IsAdminOrReadOnly
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -17,7 +17,7 @@ class PostViewSet(viewsets.ModelViewSet):
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsAdminOrReadOnly,)
 
 
 class CommentViewSet(viewsets.ModelViewSet):
