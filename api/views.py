@@ -2,7 +2,6 @@ from rest_framework import viewsets
 from posts.models import Post, Group, Comment
 from .serializers import PostSerializer, GroupSerializer, CommentSerializer
 from rest_framework.permissions import (IsAuthenticated,
-                                        IsAdminUser,
                                         IsAuthenticatedOrReadOnly)
 from .permission import IsAuthorOrReadOnly
 from rest_framework.exceptions import PermissionDenied
@@ -24,7 +23,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         if not request.user.is_staff:
-            raise PermissionDenied("Creating groups is only allowed for admin users.")
+            raise PermissionDenied
         return super().create(request, *args, **kwargs)
 
 
