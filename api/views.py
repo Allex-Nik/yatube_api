@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework import viewsets
 from posts.models import Post, Group, Comment
 from .serializers import PostSerializer, GroupSerializer, CommentSerializer
@@ -30,4 +29,3 @@ class CommentViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         post_id = self.request.query_params.get('post_id')
         serializer.save(post_id=post_id)
-

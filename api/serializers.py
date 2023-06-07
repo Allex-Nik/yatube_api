@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from posts.models import Post, Group, Comment
-from rest_framework.validators import UniqueTogetherValidator
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -24,7 +23,8 @@ class PostSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
-        fields = ('id', 'text', 'author', 'image', 'pub_date', 'group', 'comments')
+        fields = ('id', 'text', 'author',
+                  'image', 'pub_date', 'group', 'comments')
         model = Post
         read_only_fields = ('pub_date', 'author')
 
@@ -35,4 +35,3 @@ class GroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = Group
         fields = ('title', 'slug', 'description', 'posts')
-
